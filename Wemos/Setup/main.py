@@ -2,19 +2,19 @@ import machine
 import time
 import ubinascii
 import webrepl
-from umqtt.simple import MQTTClient
-from dht import DHT11
+from umqtt.robust import MQTTClient
+from dht import DHT22
 import ujson as json
 # These defaults are overwritten with the contents of /config.json by load_config()
 CONFIG = {
     "broker": "192.168.0.129",
     "sensor_pin": 0, 
     "client_id": b"esp8266_" + ubinascii.hexlify(machine.unique_id()),
-    "topic": "sensor-data",
+    "topic": "SENS-1",
 }
 client = None
 def current_temp_humidity():
-    d = DHT11(machine.Pin(CONFIG['sensor_pin']))
+    d = DHT22(machine.Pin(CONFIG['sensor_pin']))
     d.measure()
     return d.temperature(),d.humidity()
 

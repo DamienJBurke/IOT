@@ -7,7 +7,7 @@ import os
 ### Global variables
 ###########################################
 broker_address="192.168.0.129"
-topic = 'sensor-data'
+topic = 'SENS-1'
 
 
 
