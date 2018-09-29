@@ -36,7 +36,18 @@ def save_config():
     except OSError:
         print("Couldn't save /config.json")
 
+def deep_sleep(ms):
+    rtc = machine.RTC()
+    rtc.irq(trigger=rtc.ALARM0,wake=machine.DEEPSLEEP)
+    rtc.alarm(rtc.ALARM0,ms)
+    machine.deepsleep()
+
+
 def main():
+    if machine.reset_cause() == machine.DEEPSLEEP_RESET:
+        print('woke from a deep sleep')
+    else:
+        print('power on or hard reset')
     client = MQTTClient(CONFIG['client_id'], CONFIG['broker'])
     client.connect()
     print("Connected to {}".format(CONFIG['broker']))
@@ -44,7 +55,9 @@ def main():
         temphum = current_temp_humidity()
         client.publish('{}'.format(CONFIG['topic']),bytes((str(temphum[0]) + ","+ str(temphum[1])), 'utf-8'))
         print('Published: T: {} H: {} '.format(temphum[0],temphum[1]))
-        time.sleep(60)
+        time.sleep(5)
+        deep_sleep(55000)
+        #time.sleep(60)
 
 if __name__ == '__main__':
     load_config()
