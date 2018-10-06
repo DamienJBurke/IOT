@@ -1,1 +1,1 @@
-{"client_id": "esp8266_02ac4300", "topic": "sensor-data", "broker": "192.168.0.129", "sensor_pin": 0}
+{"client_id": "esp8266_02ac4300", "topic": "SENS-1", "broker": "192.168.0.129", "sensor_pin": 0}
