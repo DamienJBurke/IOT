@@ -55,8 +55,8 @@ def main():
         temphum = current_temp_humidity()
         client.publish('{}'.format(CONFIG['topic']),bytes((str(temphum[0]) + ","+ str(temphum[1])), 'utf-8'))
         print('Published: T: {} H: {} '.format(temphum[0],temphum[1]))
-        time.sleep(5)
-        deep_sleep(55000)
+        time.sleep(1)
+        deep_sleep(59000)
         #time.sleep(60)
 
 if __name__ == '__main__':
